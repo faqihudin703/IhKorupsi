@@ -6,42 +6,42 @@ from core.base import BaseDetector
 class Connector(BaseDetector):
     @property
     def name(self) -> str:
-        return "Sang Penghubung"
+        return "The Connector"
 
     @property
     def description(self) -> str:
-        return "Deteksi berbasis graf untuk perdagangan memutar dan komunitas tersembunyi."
+        return "Graph-based detection for circular trading and hidden communities."
 
     def run(self, df: pd.DataFrame, source_col: str = 'sender_id', target_col: str = 'receiver_id', amount_col: str = 'amount') -> Dict[str, Any]:
         """
-        Membangun jaringan dan menganalisis koneksi.
+        Builds a network and analyzes connections.
         """
         G = nx.from_pandas_edgelist(df, source_col, target_col, [amount_col], create_using=nx.DiGraph())
         
         results = {
-            "nama_detektor": self.name,
-            "perdagangan_memutar": self.detect_cycles(G),
-            "analisis_sentralitas": self.analyze_centrality(G),
-            "komunitas": self.detect_communities(G)
+            "detector_name": self.name,
+            "circular_trading": self.detect_cycles(G),
+            "centrality_analysis": self.analyze_centrality(G),
+            "communities": self.detect_communities(G)
         }
         return results
 
     def detect_cycles(self, G: nx.DiGraph) -> Dict[str, Any]:
         """
-        Mendeteksi jalur transaksi memutar.
+        Detects circular transaction paths.
         """
         cycles = list(nx.simple_cycles(G))
         top_cycles = cycles[:10]
         
         return {
-            "jumlah_siklus": len(cycles),
-            "sampel_siklus": top_cycles,
-            "penjelasan": "Siklus sederhana dalam graf mengindikasikan potensi perdagangan memutar atau pencucian uang."
+            "cycles_count": len(cycles),
+            "sample_cycles": top_cycles,
+            "explanation": "Simple cycles in the graph indicate potential circular trading or money laundering loops."
         }
 
     def analyze_centrality(self, G: nx.DiGraph) -> Dict[str, Any]:
         """
-        Mengidentifikasi aktor kunci.
+        Identifies key actors.
         """
         pagerank = nx.pagerank(G)
         betweenness = nx.betweenness_centrality(G)
@@ -50,22 +50,22 @@ class Connector(BaseDetector):
         top_betweenness = sorted(betweenness.items(), key=lambda x: x[1], reverse=True)[:5]
         
         return {
-            "pengaruh_tertinggi_pagerank": top_pagerank,
-            "jembatan_teratas_betweenness": top_betweenness,
-            "penjelasan": "PageRank menemukan entitas penting, sedangkan Betweenness menemukan aktor 'jembatan'."
+            "top_influencers_pagerank": top_pagerank,
+            "top_bridges_betweenness": top_betweenness,
+            "explanation": "PageRank finds important entities, while Betweenness finds 'bridge' actors who control flows between groups."
         }
 
     def detect_communities(self, G: nx.DiGraph) -> Dict[str, Any]:
         """
-        Mendeteksi kluster.
+        Detects clusters.
         """
         undirected_G = G.to_undirected()
         components = list(nx.connected_components(undirected_G))
         large_clusters = [list(c) for c in components if len(c) > 3]
         
         return {
-            "total_kluster": len(components),
-            "jumlah_kluster_besar": len(large_clusters),
-            "sampel_kluster_besar": large_clusters[:5],
-            "penjelasan": "Mengidentifikasi kelompok aktor yang sering berinteraksi satu sama lain."
+            "total_clusters": len(components),
+            "large_clusters_count": len(large_clusters),
+            "sample_large_clusters": large_clusters[:5],
+            "explanation": "Identifies groups of actors who frequently interact with each other."
         }

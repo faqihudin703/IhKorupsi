@@ -3,7 +3,7 @@ from datetime import datetime
 
 class ReportGenerator:
     """
-    Menghasilkan laporan visual dalam format HTML.
+    Generates visual reports in HTML format.
     """
     @staticmethod
     def generate_html(report_data: dict) -> str:
@@ -14,11 +14,11 @@ class ReportGenerator:
         
         html = f"""
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Forensik IH-Korupsi</title>
+    <title>IH-Korupsi Forensic Report</title>
     <style>
         body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #f4f7f6; }}
         header {{ background: #1a3a5f; color: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; text-align: center; }}
@@ -38,117 +38,118 @@ class ReportGenerator:
 </head>
 <body>
     <header>
-        <h1>Laporan IH-Korupsi</h1>
-        <p>Indikasi Hukum Korupsi - Toolkit Forensik Data</p>
-        <p>Waktu Analisis: {timestamp}</p>
+        <h1>IH-Korupsi Report</h1>
+        <p>Indikasi Hukum Korupsi - Forensic Data Toolkit</p>
+        <p>Analysis Time: {timestamp}</p>
     </header>
 
     <div class="metadata">
         <div class="card">
-            <h3>Total Transaksi</h3>
+            <h3>Total Transactions</h3>
             <p style="font-size: 1.5em; font-weight: bold;">{metadata.get('total_rows', 0):,}</p>
         </div>
         <div class="card">
-            <h3>Total Nilai</h3>
-            <p style="font-size: 1.5em; font-weight: bold;">IDR {metadata.get('total_amount', 0):,.2f}</p>
+            <h3>Total Amount</h3>
+            <p style="font-size: 1.5em; font-weight: bold;">{metadata.get('currency', 'IDR')} {metadata.get('total_amount', 0):,.2f}</p>
         </div>
         <div class="card">
-            <h3>Mata Uang</h3>
+            <h3>Currency</h3>
             <p style="font-size: 1.5em; font-weight: bold;">{metadata.get('currency', 'IDR')}</p>
         </div>
     </div>
 """
 
         # Mathematician Section
-        math = findings.get('Sang Matematikawan', {})
+        math = findings.get('The Mathematician', {})
         if math:
-            benford = math.get('uji_benford', {})
-            rsf = math.get('uji_rsf', {})
-            outliers = math.get('pencilan_statistik', {})
+            benford = math.get('benford_test', {})
+            rsf = math.get('rsf_test', {})
             
-            status_color = "red-flag" if benford.get('status_kesesuaian') == "Tidak Sesuai" else "success"
+            conformity = benford.get('conformity_status')
+            status_class = "red-flag" if conformity == "Non-conformity" else "success"
             
             html += f"""
     <div class="finding-section">
-        <h2>Deteksi Statistik (Sang Matematikawan)</h2>
+        <h2>Statistical Detection (The Mathematician)</h2>
         <div class="card">
-            <h3>Uji Hukum Benford</h3>
-            <p>Status: <span class="{status_color}">{benford.get('status_kesesuaian')}</span> (MAD: {benford.get('mad', 0):.4f})</p>
-            <p class="explanation">{benford.get('penjelasan')}</p>
+            <h3>Benford's Law Test</h3>
+            <p>Status: <span class="{status_class}">{conformity}</span> (MAD: {benford.get('mad', 0):.4f})</p>
+            <p class="explanation">{benford.get('explanation')}</p>
         </div>
         
         <div class="card" style="margin-top:20px;">
-            <h3>Entitas Risiko Tinggi (RSF)</h3>
+            <h3>High Risk Entities (RSF)</h3>
             <table>
-                <tr><th>Entitas</th><th>Skor RSF</th><th>Transaksi Terbesar</th><th>Rata-rata Lain</th></tr>
+                <tr><th>Entity</th><th>RSF Score</th><th>Largest Transaction</th><th>Average of Others</th></tr>
 """
-            for e in rsf.get('entitas_risiko_tinggi', []):
-                html += f"<tr><td>{e['entitas']}</td><td>{e['nilai_rsf']:.2f}</td><td>{e['transaksi_terbesar']:,.0f}</td><td>{e['rata_rata_lainnya']:,.0f}</td></tr>"
+            for e in rsf.get('high_risk_entities', []):
+                html += f"<tr><td>{e['entity']}</td><td>{e['rsf_value']:.2f}</td><td>{e['largest_transaction']:,.0f}</td><td>{e['average_others']:,.0f}</td></tr>"
             
             html += f"""
             </table>
-            <p class="explanation">{rsf.get('penjelasan')}</p>
+            <p class="explanation">{rsf.get('explanation')}</p>
         </div>
     </div>
 """
 
         # Chronologist Section
-        chrono = findings.get('Sang Kronolog', {})
+        chrono = findings.get('The Chronologist', {})
         if chrono:
             cliff = chrono.get('fiscal_cliff', {})
-            velocity = chrono.get('anomali_kecepatan', {})
+            velocity = chrono.get('velocity_anomalies', {})
             
-            status_color = "red-flag" if cliff.get('status') == "Dumping Ekstrem" else "success"
+            status = cliff.get('status')
+            status_class = "red-flag" if status == "Extreme Dumping" else "success"
             
             html += f"""
     <div class="finding-section">
-        <h2>Deteksi Waktu (Sang Kronolog)</h2>
+        <h2>Time-Series Detection (The Chronologist)</h2>
         <div class="card">
-            <h3>Fiscal Cliff (Dumping Anggaran)</h3>
-            <p>Status: <span class="{status_color}">{cliff.get('status')}</span> (Rasio: {cliff.get('rasio_desember_vs_rata_rata', 0):.2f}x)</p>
-            <p class="explanation">{cliff.get('penjelasan')}</p>
+            <h3>Fiscal Cliff (Budget Dumping)</h3>
+            <p>Status: <span class="{status_class}">{status}</span> (Ratio: {cliff.get('december_vs_avg_ratio', 0):.2f}x)</p>
+            <p class="explanation">{cliff.get('explanation')}</p>
         </div>
         
         <div class="card" style="margin-top:20px;">
-            <h3>Kejadian Transaksi Berfrekuensi Tinggi</h3>
+            <h3>High Frequency Transaction Events</h3>
             <table>
-                <tr><th>Vendor/Entitas</th><th>Tanggal</th><th>Jumlah Transaksi</th></tr>
+                <tr><th>Vendor/Entity</th><th>Date</th><th>Transaction Count</th></tr>
 """
-            for v in velocity.get('kejadian_kecepatan_tinggi', []):
-                html += f"<tr><td>{v['vendor_id']}</td><td>{v['date_only']}</td><td>{v['jumlah']}</td></tr>"
+            for v in velocity.get('high_velocity_events', []):
+                html += f"<tr><td>{v['vendor_id']}</td><td>{v['date_only']}</td><td>{v['count']}</td></tr>"
             
             html += f"""
             </table>
-            <p class="explanation">{velocity.get('penjelasan')}</p>
+            <p class="explanation">{velocity.get('explanation')}</p>
         </div>
     </div>
 """
 
         # String Detective Section
-        string_det = findings.get('Detektif String', {})
+        string_det = findings.get('String Detective', {})
         if string_det:
-            ghosts = string_det.get('potensi_vendor_hantu', [])
+            ghosts = string_det.get('potential_ghost_vendors', [])
             html += f"""
     <div class="finding-section">
-        <h2>Deteksi Nama (Detektif String)</h2>
+        <h2>String Detection (String Detective)</h2>
         <div class="card">
-            <h3>Potensi Vendor Hantu / Duplikasi Nama</h3>
+            <h3>Potential Ghost Vendors / Name Duplication</h3>
             <table>
-                <tr><th>Nama 1</th><th>Nama 2</th><th>Skor Kemiripan</th></tr>
+                <tr><th>Name 1</th><th>Name 2</th><th>Similarity Score</th></tr>
 """
             for g in ghosts:
-                html += f"<tr><td>{g['nama_1']}</td><td>{g['nama_2']}</td><td>{g['skor_kemiripan']*100:.1f}%</td></tr>"
+                html += f"<tr><td>{g['name_1']}</td><td>{g['name_2']}</td><td>{g['similarity_score']*100:.1f}%</td></tr>"
             
             html += f"""
             </table>
-            <p class="explanation">{string_det.get('penjelasan')}</p>
+            <p class="explanation">{string_det.get('explanation')}</p>
         </div>
     </div>
 """
 
         html += """
     <footer>
-        <p>Dibuat oleh OurCreativity Edisi Coding - Untuk Indonesia Bebas Korupsi</p>
+        <p>Created by OurCreativity Edisi Coding - Towards a More Transparent Future</p>
     </footer>
 </body>
 </html>

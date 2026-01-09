@@ -4,33 +4,33 @@ import pandas as pd
 
 class BaseDetector(ABC):
     """
-    Kelas dasar untuk semua detektor forensik di IH-Korupsi.
-    Setiap detektor harus memberikan penjelasan matematis deterministik untuk setiap flag yang dihasilkan.
+    Base class for all forensic detectors in IH-Korupsi.
+    Each detector must provide a deterministic mathematical explanation for its findings.
     """
     
     @property
     @abstractmethod
     def name(self) -> str:
-        """Mengembalikan nama detektor."""
+        """Returns the name of the detector."""
         pass
 
     @property
     @abstractmethod
     def description(self) -> str:
-        """Mengembalikan deskripsi singkat dari logika detektor."""
+        """Returns a brief description of the detector's logic."""
         pass
 
     @abstractmethod
     def run(self, df: pd.DataFrame, **kwargs) -> Dict[str, Any]:
         """
-        Menjalankan logika deteksi pada DataFrame yang diberikan.
-        Mengembalikan dictionary yang berisi temuan, statistik, dan record yang di-flag.
+        Executes the detection logic on the provided DataFrame.
+        Returns a dictionary containing findings, statistics, and flagged records.
         """
         pass
 
     def explain(self, finding_id: str) -> str:
         """
-        Memberikan penjelasan matematis untuk temuan spesifik.
-        Bisa di-override untuk logika yang lebih kompleks.
+        Provides a mathematical explanation for a specific finding.
+        Can be overridden for complex logic.
         """
-        return f"Temuan {finding_id} di-flag berdasarkan aturan algoritma {self.name}."
+        return f"Finding {finding_id} was flagged based on the {self.name} algorithm rules."

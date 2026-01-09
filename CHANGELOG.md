@@ -1,57 +1,42 @@
-# IH-Korupsi - Changelog dan Catatan Proyek
+# IH-Korupsi - Project Changelog
 
-## Versi 1.0.0 - Rilis Awal
+## Version 1.0.0 - Initial Release
 
-### Dibuat oleh
+### Created by
 **OurCreativity Edisi Coding**
 
-### Tanggal Rilis
-9 Januari 2026
+### Release Date
+January 9, 2026
 
-### Fitur yang Diimplementasikan
+### Implemented Features
 
-#### 1. Modul The Mathematician
-- ✅ Hukum Benford untuk deteksi manipulasi angka
-- ✅ Relative Size Factor (RSF) untuk deteksi outlier vendor
-- ✅ Z-Score dan IQR untuk deteksi pencilan
+#### 1. The Mathematician Module
+- ✅ Benford's Law for digit manipulation detection
+- ✅ Relative Size Factor (RSF) for vendor outlier detection
+- ✅ Z-Score and IQR for statistical outlier detection
 
-#### 2. Modul The Connector
-- ✅ Deteksi perdagangan memutar (circular trading)
-- ✅ Analisis sentralitas menggunakan PageRank dan Betweenness
-- ✅ Deteksi komunitas/kluster tersembunyi
+#### 2. The Connector Module
+- ✅ Circular trading detection
+- ✅ Centrality analysis (PageRank & Betweenness)
+- ✅ Hidden community detection
 
-#### 3. Modul The Chronologist
-- ✅ Deteksi Fiscal Cliff (budget dumping)
-- ✅ Velocity check untuk transaksi tidak wajar
+#### 3. The Chronologist Module
+- ✅ Fiscal Cliff detection (year-end budget dumping)
+- ✅ Velocity check for unusual transaction frequency
 
-#### 4. Modul String Detective
-- ✅ Fuzzy matching dengan Levenshtein Distance
-- ✅ Deteksi vendor hantu
+#### 4. String Detective Module
+- ✅ Fuzzy matching using Levenshtein Distance
+- ✅ Ghost vendor detection
 
-### Teknologi yang Digunakan
+### Technology Stack
 - Python 3.10+
-- Pandas untuk manipulasi data
-- NumPy untuk operasi matematika
-- NetworkX untuk analisis graf
-- SciPy untuk statistik
+- Pandas, NumPy, NetworkX, SciPy
 
-### Prinsip Desain
-1. **Zero AI**: Tidak menggunakan Machine Learning sama sekali
-2. **Transparan**: Setiap deteksi bisa dijelaskan secara matematis
-3. **Auditable**: Kode terbuka dan bisa diverifikasi
-4. **Edukatif**: Dibuat untuk pembelajaran dan transparansi publik
-
-### Penggunaan
-```bash
-python main.py --type sample
-```
-
-### Lisensi
-MIT License
-
-### Kontribusi
-Terbuka untuk kontribusi dari komunitas!
+### Design Principles
+1. **Zero AI**: No Machine Learning dependency
+2. **Transparent**: Auditable mathematical explanations
+3. **Open Source**: Community-driven transparency tool
 
 ---
 
-*Demi Dunia Bebas Korupsi*
+*Towards a Corruption-Free Future*

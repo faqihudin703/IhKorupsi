@@ -1,104 +1,104 @@
 ![IH-Korupsi Banner](banner.png)
 
-# IH-Korupsi: Toolkit Forensik Data Anti-Korupsi
+# IH-Korupsi: Anti-Corruption Data Forensic Toolkit
 
-**IH-Korupsi** adalah singkatan dari **Indikasi Hukum Korupsi** - sebuah toolkit Open Source berbasis Python untuk mendeteksi anomali keuangan dan potensi korupsi menggunakan metode matematika murni **tanpa AI/Machine Learning**.
+**IH-Korupsi** (short for **Indikasi Hukum Korupsi** or *Legal Indication of Corruption*) is an open-source Python toolkit designed to detect financial anomalies and potential corruption using pure mathematical methods **without AI/Machine Learning**.
 
-Dibuat oleh **OurCreativity Edisi Coding** untuk mendukung transparansi dan akuntabilitas keuangan publik.
-
----
-
-## Mengapa IH-Korupsi?
-
-Korupsi merugikan bangsa dan ekonomi. IH-Korupsi hadir sebagai alat edukatif yang bisa digunakan oleh:
-- Auditor internal pemerintah
-- Jurnalis investigasi
-- Peneliti anti-korupsi
-- Mahasiswa yang mempelajari forensik data
-- LSM transparansi
-- Siapa saja yang peduli dengan pemberantasan korupsi
-
-### Prinsip Dasar
-1. **Transparan**: Setiap deteksi anomali bisa dijelaskan dengan rumus matematika
-2. **Auditable**: Tidak ada "black box" - semua algoritma terbuka
-3. **Tanpa AI**: Murni statistik dan matematika agar hasil bisa dipertanggungjawabkan
-4. **Open Source**: Bebas digunakan, dipelajari, dan dikembangkan
+Developed by **OurCreativity Edisi Coding** to support transparency and financial accountability worldwide.
 
 ---
 
-## Fitur Utama
+## Why IH-Korupsi?
 
-### 1. The Mathematician (Deteksi Statistik)
+Corruption harms economies and societies. IH-Korupsi provides an educational and professional tool that can be used by:
+- Government internal auditors
+- Investigative journalists
+- Anti-corruption researchers
+- Students of data forensics
+- Transparency NGOs
+- Anyone committed to fighting corruption
 
-#### Hukum Benford
-Mendeteksi manipulasi angka pada laporan keuangan. Hukum Benford menyatakan bahwa dalam data keuangan alami, digit pertama angka mengikuti distribusi logaritmik. Jika seseorang membuat angka palsu, distribusinya akan menyimpang.
+### Core Principles
+1. **Transparency**: Every anomaly detection can be explained through mathematical formulas.
+2. **Auditable**: No "black box" algorithms—everything is open and deterministic.
+3. **Zero AI Dependency**: Pure statistics and mathematics to ensure results are legally defensible.
+4. **Open Source**: Free to use, study, and improve.
 
-**Contoh Kasus**: Laporan keuangan yang dimanipulasi cenderung memiliki terlalu banyak angka yang dimulai dengan digit 5, 6, 7, 8.
+---
+
+## Key Features
+
+### 1. The Mathematician (Statistical Detection)
+
+#### Benford's Law
+Detects manipulation in financial reports. Benford’s Law states that in natural financial data, the first leading digit follows a specific logarithmic distribution. If someone fabricates numbers, the distribution will likely deviate.
+
+**Case Example**: Financial reports that are manipulated tend to have an unusual spike in numbers starting with digits like 5, 6, 7, or 8.
 
 #### Relative Size Factor (RSF)
-Mendeteksi transaksi yang tidak wajar untuk suatu vendor. RSF membandingkan transaksi terbesar vendor dengan rata-rata transaksi mereka yang lain.
+Identifies unusual transactions for a specific entity. RSF compares an entity's largest transaction to the average of its other transactions.
 
-**Rumus**: `RSF = Transaksi Terbesar / Rata-rata Transaksi Lainnya`
+**Formula**: `RSF = Largest Transaction / Average of Other Transactions`
 
-**Contoh Kasus**: Vendor yang biasanya menerima Rp 5-10 juta tiba-tiba mendapat kontrak Rp 500 juta.
+**Case Example**: A vendor that usually receives $500–$1,000 suddenly gets a contract for $50,000.
 
-#### Z-Score dan IQR
-Metode statistik standar untuk menemukan outlier (pencilan) ekstrem dalam data transaksi.
-
----
-
-### 2. The Connector (Analisis Jaringan)
-
-#### Deteksi Perdagangan Memutar (Circular Trading)
-Menemukan aliran dana yang kembali ke pengirim asli melalui beberapa perantara.
-
-**Contoh Kasus**: 
-```
-Dinas A → PT. X → CV. Y → PT. Z → Dinas A
-```
-Pola ini sering digunakan untuk mark-up harga atau pencucian uang.
-
-#### Analisis Sentralitas
-Menemukan aktor kunci yang tersembunyi dalam jaringan korupsi menggunakan algoritma PageRank dan Betweenness Centrality.
+#### Z-Score & IQR
+Standard statistical methods to find extreme outliers in transaction data.
 
 ---
 
-### 3. The Chronologist (Analisis Waktu)
+### 2. The Connector (Network Analysis)
+
+#### Circular Trading Detection
+Finds funds that return to the original sender through multiple intermediaries.
+
+**Case Example**: 
+```
+Department A → Vendor X → Sub-vendor Y → Consultant Z → Department A
+```
+This pattern is often used for price mark-ups or money laundering loops.
+
+#### Centrality Analysis
+Finds hidden key actors in a network using algorithms like PageRank and Betweenness Centrality.
+
+---
+
+### 3. The Chronologist (Time-Series Analysis)
 
 #### Fiscal Cliff Dumping
-Mendeteksi lonjakan pengeluaran tidak wajar di akhir tahun anggaran. Pejabat yang takut anggaran dipotong sering "membakar" uang di bulan Desember.
+Detects unusual spending spikes during the final month of the fiscal year (budget dumping).
 
-**Indikator**: Rasio pengeluaran Desember vs rata-rata bulanan > 2.5x
+**Indicator**: Ratio of December spending vs. monthly average > 2.5x.
 
 #### Velocity Check
-Mendeteksi frekuensi transaksi yang tidak manusiawi dalam waktu singkat.
+Detects inhuman transaction frequencies within a short period.
 
-**Contoh Kasus**: 50 transaksi dalam 1 hari untuk vendor yang sama.
-
----
-
-### 4. String Detective (Deteksi Nama Ganda)
-
-#### Fuzzy Matching
-Menemukan "vendor hantu" - entity dengan nama yang sedikit berbeda tapi sebenarnya sama.
-
-**Contoh**:
-- `PT. Maju Jaya` vs `PT. Maju  Jaya` (spasi ganda)
-- `CV. Berkah Mandiri` vs `CV. Barkah Mandiri` (typo)
-
-Menggunakan algoritma Levenshtein Distance tanpa library AI.
+**Case Example**: 50 transactions in a single day for the same vendor.
 
 ---
 
-## Instalasi
+### 4. String Detective (Name Duplication)
 
-### Persyaratan Sistem
-- Python 3.10 atau lebih baru
+#### Fuzzy Name Matching
+Identifies "Ghost Vendors"—entities with slightly different names but likely the same identity.
+
+**Examples**:
+- `Global Solutions Corp` vs `Global  Solutions Corp` (double space)
+- `Smith & Sons Ltd` vs `Smith and Sons Ltd`
+
+Uses the Levenshtein Distance algorithm without external NLP libraries.
+
+---
+
+## Installation
+
+### Prerequisites
+- Python 3.10 or newer
 - Windows / Linux / MacOS
 
-### Langkah Instalasi
+### Setup
 
-1. Clone repository ini:
+1. Clone this repository:
 ```bash
 git clone https://github.com/[username]/ih-korupsi.git
 cd ih-korupsi
@@ -109,52 +109,45 @@ cd ih-korupsi
 pip install -r requirements.txt
 ```
 
-3. Selesai! Toolkit siap digunakan.
-
 ---
 
-## Cara Penggunaan
+## Usage
 
-### Mode 1: Analisis Data Sample (Untuk Belajar)
+### Mode 1: Run with Sample Data (For Learning)
 
-Jalankan dengan data sintetis yang sudah disediakan dan buat laporan visual:
+Run the toolkit with synthetic data containing injected anomalies:
 
 ```bash
-python main.py --type sample --output laporan_sample.json --html laporan_visual.html
+python main.py --type sample --output sample_report.json --html visual_report.html
 ```
 
-Sistem akan:
-1. Membuat 500 baris data transaksi palsu
-2. Menanamkan anomali yang disengaja (Benford, RSF, Fiscal Cliff)
-3. Menjalankan analisis deteksi
-4. Menghasilkan laporan JSON (untuk data) dan HTML (untuk visualisasi cantik)
+The system will:
+1. Generate 500 rows of synthetic transaction data.
+2. Inject intentional anomalies (Benford, RSF, Fiscal Cliff).
+3. Execute all detection modules.
+4. Generate a JSON data report and a beautiful HTML visual report.
 
-### Mode 2: Analisis Data Anda Sendiri
+### Mode 2: Analyze Your Own Data
 
-#### Format CSV
-File CSV harus memiliki kolom minimal:
-- `amount` = Nilai transaksi
-- `vendor_name` = Nama vendor/penerima
-- `vendor_id` = ID unik vendor
-- `date` = Tanggal transaksi
-- `sender_id` = Pengirim
-- `receiver_id` = Penerima
+#### CSV Format
+Your CSV must include at least these columns:
+- `amount`: Transaction value
+- `vendor_name`: Vendor or recipient name
+- `vendor_id`: Unique vendor ID
+- `date`: Transaction date (YYYY-MM-DD)
+- `sender_id`: Sender identifier
+- `receiver_id`: Receiver identifier
 
-Contoh:
+Example:
 ```bash
-python main.py --input data_keuangan.csv --type csv --output laporan_hasil.json
-```
-
-#### Format JSON
-```bash
-python main.py --input data.json --type json --output hasil.json
+python main.py --input my_data.csv --type csv --output my_results.json --html report.html
 ```
 
 ---
 
-## Memahami Laporan Hasil
+## Understanding the Report
 
-Laporan disimpan dalam format JSON dengan struktur:
+The JSON report is structured as follows:
 
 ```json
 {
@@ -172,105 +165,42 @@ Laporan disimpan dalam format JSON dengan struktur:
 }
 ```
 
-### Interpretasi Temuan
+### Interpreting Findings
 
-#### Benford's Law
-- **MAD < 0.006**: Sangat sesuai (Normal)
-- **MAD 0.006-0.012**: Dapat diterima
-- **MAD 0.012-0.015**: Marginal (Perlu perhatian)
-- **MAD > 0.015**: Tidak sesuai (Red flag!)
+#### Benford's Law (MAD Score)
+- **MAD < 0.006**: High Conformity (Normal)
+- **MAD 0.006–0.012**: Acceptable
+- **MAD 0.012–0.015**: Marginal (Needs attention)
+- **MAD > 0.015**: Non-conformity (Red flag!)
 
-#### RSF
+#### RSF (Relative Size Factor)
 - **RSF < 5**: Normal
-- **RSF 5-10**: Perlu dicek
-- **RSF > 10**: Sangat mencurigakan
-
-#### Fiscal Cliff
-- **Rasio < 1.5**: Normal
-- **Rasio 1.5-2.5**: Peningkatan signifikan
-- **Rasio > 2.5**: Budget dumping ekstrem
+- **RSF 5–10**: Needs verification
+- **RSF > 10**: Highly suspicious
 
 ---
 
-## Contoh Kasus Nyata (Edukatif)
+## Important Notes & Limitations
 
-### Kasus 1: Manipulasi Digit Pertama
-Seorang bendahara membuat laporan pengeluaran fiktif. Karena malas, dia membuat angka-angka acak yang banyak dimulai dengan 5, 6, 7. IH-Korupsi langsung mendeteksi melalui Benford's Law dengan MAD 0.18.
-
-### Kasus 2: Vendor Hantu
-Sebuah dinas memiliki 3 vendor dengan nama mirip: "PT. Sejahtera", "PT. Sejatera", "PT. Se-Jahtera". String Detective menemukan similarity 95%+. Investigasi lebih lanjut menunjukkan pemiliknya sama.
-
-### Kasus 3: Circular Trading
-Dana APBD mengalir: Dinas → Kontraktor A → Supplier B → Konsultan C → kembali ke Dinas (melalui pejabat). The Connector menemukan cycle 4-node ini.
+1. **Not Legal Proof**: IH-Korupsi provides **indicators only**. Anomalies do not automatically mean corruption; they require further investigation.
+2. **Context Matters**: Some anomalies can be legitimate (e.g., a massive infrastructure project causing a high RSF).
+3. **Data Quality**: Garbage in, garbage out. Ensure your input data is clean.
+4. **Ethical Use**: This toolkit is for transparency and education. Please use it responsibly.
 
 ---
 
-## Batasan dan Catatan Penting
+## About OurCreativity Edisi Coding
 
-1. **Bukan Bukti Hukum**: IH-Korupsi hanya memberikan **indikasi awal**. Anomali belum tentu korupsi. Diperlukan investigasi lebih lanjut.
+We are a developer community that believes technology can be a force for social good. IH-Korupsi is one of our efforts toward a more transparent and accountable future.
 
-2. **Context Matters**: Beberapa anomali bisa dijelaskan secara sah. Contoh: Proyek infrastruktur besar memang menghasilkan RSF tinggi.
-
-3. **Data Quality**: Garbage in, garbage out. Pastikan data input bersih dan valid.
-
-4. **Ethical Use**: Toolkit ini untuk transparansi dan edukasi, bukan untuk fitnah atau black campaign.
+**Slogan**: *"Code for Justice, Data for Transparency"*
 
 ---
 
-## Roadmap Pengembangan
+## License
 
-- [ ] Export laporan ke format PDF/HTML
-- [ ] Dashboard visualisasi web
-- [ ] Integrasi dengan database SQL langsung
-- [ ] Modul khusus untuk pengadaan barang/jasa
-- [ ] Analisis tren multi-tahun
-- [ ] Dokumentasi lebih lengkap dengan video tutorial
+This project is licensed under the **MIT License**.
 
 ---
 
-## Kontribusi
-
-IH-Korupsi adalah proyek Open Source. Kami menerima kontribusi dalam bentuk:
-- Laporan bug
-- Fitur baru
-- Perbaikan dokumentasi
-- Studi kasus edukatif
-- Terjemahan ke bahasa daerah
-
-Silakan buat Pull Request atau Issue di GitHub.
-
----
-
-## Lisensi
-
-Proyek ini menggunakan lisensi **MIT License** - bebas digunakan untuk tujuan edukatif dan non-komersial.
-
----
-
-## Disclaimer
-
-Toolkit ini dibuat untuk tujuan **edukatif dan penelitian**. Penggunaan untuk tuduhan tanpa bukti yang cukup adalah tanggung jawab pengguna. Selalu lakukan due diligence dan verifikasi independen.
-
----
-
-## Tentang OurCreativity Edisi Coding
-
-Kami adalah komunitas developer yang percaya teknologi bisa digunakan untuk kebaikan sosial. IH-Korupsi adalah salah satu proyek kami untuk mendukung Indonesia bebas korupsi.
-
-**Slogan**: "Kode untuk Keadilan, Data untuk Transparansi"
-
----
-
-## Kontak dan Dukungan
-
-Jika Anda menemukan bug atau memiliki pertanyaan:
-- Buat Issue di GitHub repository ini
-- Untuk kerjasama: [@oc.edisicoding](https://instagram.com/oc.edisicoding)
-
----
-
-**Mari bersama membangun Indonesia yang lebih transparan dan akuntabel!**
-
----
-
-*Dibuat dengan dedikasi untuk masa depan Indonesia yang lebih baik.*
+**Join us in building a cleaner, more transparent world!**
