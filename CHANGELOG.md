@@ -54,4 +54,4 @@ Terbuka untuk kontribusi dari komunitas!
 
 ---
 
-*Demi Indonesia Bebas Korupsi*
+*Demi Dunia Bebas Korupsi*
