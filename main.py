@@ -56,7 +56,7 @@ def main():
             print("Warning: Cannot anchor sample data (no physical input file to hash).")
             print("   Please use a real CSV/JSON file with --input to use this feature.")
         else:
-            reporter = EvidenceReporter(args.report_url, args.api_key)
+            reporter = EvidenceReporter(args.report_url)
             
             print(f"Sending evidence to: {args.report_url}...")
             server_response = reporter.send_report(args.input, report)
