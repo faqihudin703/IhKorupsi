@@ -69,6 +69,7 @@ def main():
                     val_resp = server_response.get("validator_response", {})
                     if "txHash" in val_resp:
                         print(f"Blockchain TX: {val_resp['txHash']}")
+                        print(f"Check on explorer : https://sepolia.scrollscan.com/tx/{val_resp['txHash']}")
                 else:
                     print(f"Server Response: {json.dumps(server_response, indent=2)}")
 
