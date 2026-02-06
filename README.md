@@ -160,7 +160,7 @@ python main.py --input my_data.csv --type csv --output my_results.json --html re
 You can automatically send the audit evidence (input file hash & output report hash) to an external server or blockchain validator using the `--report-url` flag.
 
 ```bash
-python main.py --input my_data.csv --type csv --report-url <YOUR_VALIDATOR_URL>
+python main.py --input my_data.csv --type csv --output my_results.json --html report.html --report-url <YOUR_VALIDATOR_URL>
 
 ```
 
